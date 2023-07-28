@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mis Doramas</title>
+</head>
+<style>
+    
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  text-align: center;
+  background-image: url("https://larepublica.cronosmedia.glr.pe/migration/images/XZMOET3YD5ERBATYWJYLOX5FEE.jpg"); /* Ruta de la imagen de fondo */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center center;
+  background-color: #b40087;
+}
+
+h1, h2 {
+  margin-top: 40px;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #9ac8e7;
+  color: #b40087;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+
+ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+li {
+  display: inline-block;
+  width: 200px;
+  padding: 10px;
+  margin: 10px;
+  border: 2px solid #9ac8e7;
+  background-color: #ffffff;
+}
+
+
+form {
+  margin-top: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+select {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+input[type="submit"] {
+  background-color: #9ac8e7;
+  color: #b40087;
+  padding: 8px 15px;
+  border: none;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #ffffff;
+}
+
+</style>
+<body>
+  <h1>Mis Doramas Vistos</h1>
+  <ul>
+    <% for (const dorama of doramasVistos) { %>
+      <li>
+        <%= dorama.name %> - Visto
+        <form method="POST" action="/editar">
+          <input type="hidden" name="id" value="<%= dorama.id %>">
+          <input type="submit" value="Editar">
+        </form>
+        <form method="POST" action="/borrar">
+          <input type="hidden" name="id" value="<%= dorama.id %>">
+          <input type="submit" value="Borrar">
+        </form>
+      </li>
+    <% } %>
+  </ul>
+  <h1>Mis Doramas Pendientes</h1>
+  <ul>
+    <% for (const dorama of doramasPendientes) { %>
+      <li>
+        <%= dorama.name %> - Pendiente
+        <form method="POST" action="/editar">
+          <input type="hidden" name="id" value="<%= dorama.id %>">
+          <input type="submit" value="Editar">
+        </form>
+        <form method="POST" action="/borrar">
+          <input type="hidden" name="id" value="<%= dorama.id %>">
+          <input type="submit" value="Borrar">
+        </form>
+      </li>
+    <% } %>
+  </ul>
+  <h2>Agregar Nuevo Dorama</h2>
+  <form method="POST" action="/agregar">
+    <label for="name">Nombre:</label>
+    <input type="text" id="name" name="name" required>
+    <label for="status">Estado:</label>
+    <select id="status" name="status" required>
+      <option value="visto">Visto</option>
+      <option value="pendiente">Pendiente</option>
+    </select>
+    <input type="submit" value="Agregar">
+  </form>
+</body>
+</html>
